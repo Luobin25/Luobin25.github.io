@@ -82,10 +82,12 @@ tags:
 >路径压缩
 	
 	parent[p] = parent[parent[p]];使得find的过程中调整树的高度
+	
 >完全路径压缩
 	
 	parent[p] = Find(parent[p])通过递归faltten out树，使得
     每个leaf code指向root code
+    
 ## Redundant Connection
 题目：
 给予一个二维数组，找出可以移除的edge（其中一个value）使得connection不再冗余（leetcode 684题）
