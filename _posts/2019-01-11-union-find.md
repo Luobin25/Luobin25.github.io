@@ -79,6 +79,27 @@ tags:
 
 在最坏的情况下，假定树总共有2^N个节点。当我们归并两个含有2^n个节点的树时，树的高度增加到了n+1.所以对于N个触点，由加权quick-union算法构造的森林中任意节点的深度最多为lgN
 ## 路径压缩的加权quick-union
+## quick-find
+原理：当且仅当id[p]等于id[q]时p和q是连通的。换句话说，在同一个连通分量中的所有触点在id[]中的值必须全部相同。
+
+>存在的问题:
+
+```
+	public void union(int p, int q) {
+        int pID = id[p];   // needed for correctness
+        int qID = id[q];   // to reduce the number of array accesses
+
+        // p and q are already in the same component
+        if (pID == qID) return;
+
+        for (int i = 0; i < id.length; i++)
+            if (id[i] == pID) id[i] = qID;
+        count--;
+    }
+```
+对于每一对union的输入，我们都需要扫描整个id【】数组，假设我们使用quick-find来解决连通性问题，并且最后只得到了一个联通分量。至少需要～N^2次数组访问
+	
+    quick-find 是一个平方级别算法
 ### 路径压缩
 	parent[p] = parent[parent[p]];使得find的过程中调整树的高度
 ### 完全路径压缩
